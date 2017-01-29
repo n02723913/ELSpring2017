@@ -1,2 +1,3 @@
-# Code Directory. 
-All your code should go here. Make sure files are named as explicitly as possible.
+# Nathan's coding genius. 
+## All Nathan's code should go here.
+please give me an A professor
