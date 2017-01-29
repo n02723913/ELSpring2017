@@ -1,2 +1,3 @@
-# ELSpring2017
-Template for Spring 2017 Embedded Linux class This is a template for students to clone for their work in the class. You should maintain the directory structure
+# Nathan Dalling ELSpring2017 Class Repo.
+## This for my embeded Linux class in SUNY Newpaltz .
+### Enjoy looking at the code employers and professors.
