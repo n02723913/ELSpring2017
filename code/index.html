@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+	<title>Cam</title>
+	 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<meta charset="utf-8">
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="assets/css/docs.css" rel="stylesheet">
+		<link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="../content/css/main.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<header>
+		Welcome to WebCamPi
+	</header>
+	<body>
+		<div class="row">
+			<div class="col-lg-8">
+				<h1>Camera</h1>
+				<a>Preview</a>
+				<img alt="" src="http://(YOUR IP    ):8090/?action=stream" width="320" height="240" />
+			</div>
+			<div class="col-lg-4" ng-app="myApp" ng-controller="myCtrl">
+				<div class="row" >
+					<div class="col-lg-4">
+						x= {{x}}
+					</div>
+					<div class="col-lg-4">
+						y= {{y}}
+					</div>
+					<div class="col-lg-4">
+						arrow click is  <input type="number" name="deg" ng-model="deg" placeholder="{{deg}}" max="180" min="-180"> degrees
+						<button ng-click="reset()">reset</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<button ng-click="left()">left</button>
+					</div>
+					<div class="col-lg-4">
+						<button ng-click="up()">up</button>
+						<button ng-click="down()">down</button>
+					</div>
+					<div class="col-lg-4">
+						<button ng-click="right()">right</button>
+						
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="row">
+			<h1>Gallery</h1>
+			<div class="col-lg-12">
+				
+			</div>
+			
+		</div>
+		<script>
+		
+		 function test () {
+		  var gpio = require("pi-gpio");
+
+				gpio.open(16, "output", function(err) {		// Open pin 16 for output
+					gpio.write(14, 1, function() {			// Set pin 16 high (1)
+						gpio.close(14);						// Close pin 16
+					});
+				});
+		}
+			var app = angular.module('myApp', []);
+				app.controller('myCtrl', function($scope) {
+				    $scope.x = 0;
+				    $scope.y = 0;
+				    $scope.deg = 10;
+				    $scope.a ;
+				
+			//var gpio = require("pi-gpio");
+			 
+			//gpio.open(16, "output", function(err) {		// Open pin 16 for output 
+			  //  gpio.write(16, 1, function() {			// Set pin 16 high (1) have to find out how many degs it turns to 1 
+			    //    gpio.close(16);						// Close pin 16 
+			  //  });
+			//});
+			var  pic;
+			$scope.reset = function() {
+			  if($scope.x!=0){
+			  	if($scope.x<0){
+			  		$scope.up(-$scope.x);
+			  	}
+			  	if($scope.x>0){
+			  		$scope.down($scope.x);
+			  	}
+			  }
+			  if($scope.y!=0){
+			  	if($scope.y<0){
+			  		$scope.right(-$scope.y);
+			  	}
+			  	if($scope.y>0){
+			  		$scope.left($scope.y);
+			  	}
+			  }
+			};
+			$scope.preview = function() {
+				//take pic 
+				//store into mem
+				//make pic link address = pic
+			};
+			$scope.capture = function () {
+			  	//take pic 
+				//store into mem
+			};
+			
+			$scope.up= function(a) {
+			  if(a==null){
+			  	//move by deg 
+			  	$scope.x=$scope.x+$scope.deg;
+			  }
+			  else{
+			  	//move by int a 
+			  	$scope.x=$scope.x+a;
+			  }
+			};
+			$scope.down = function(a) {
+			  if(a==null){
+			  	//move b$scope.y $scope.deg 
+			  	$scope.x=$scope.x-$scope.deg;
+			  }
+			  else{
+			  	//move by int a 
+			  	$scope.x=$scope.x-a;
+			  }
+			};
+			$scope.left = function(a) {
+			  if(a==null){
+			  	//move by deg 
+			  	$scope.y=$scope.y-$scope.deg;
+			  }
+			  else{
+			  	//move by int a 
+			  	//wait
+			  	$scope.y=$scope.y-a;
+			  }
+			};
+			$scope.right = function(a) {
+			 if(a==null){
+			  	//move by deg 
+			  	$scope.y=$scope.y+$scope.deg;
+			  }
+			  else{
+			  	//move by int a 
+			  	$scope.y=$scope.y+a;
+			  }
+			};
+			
+			});
+		</script>
+	</body>
+	<footer>
+		<h1>Created by Joseph Abel and Nathan Dalling</h1>
+	</footer>
+	
+	
+	
+	
+	
+	
+</html>
