@@ -22,36 +22,50 @@
 			<div class="col-lg-8">
 				<h1>Camera</h1>
 				<a>Preview</a>
-				<img alt="" src="http://(YOUR IP    ):8090/?action=stream" width="320" height="240" />
+				<img alt="" src="http://(YOUR IP    ):8090/?action=stream" width="50%" height="50%" />
 			</div>
-			<div class="col-lg-4" ng-app="myApp" ng-controller="myCtrl">
+			<div class="col-lg-4">
 				<div class="row" >
+					Current
 					<div class="col-lg-4">
-						x= {{x}}
+						x = {{x}}
 					</div>
 					<div class="col-lg-4">
-						y= {{y}}
+						y = {{y}}
 					</div>
 					<div class="col-lg-4">
-						arrow click is  <input type="number" name="deg" ng-model="deg" placeholder="{{deg}}" max="180" min="-180"> degrees
-						<button ng-click="reset()">reset</button>
+						arrow click is  <input type="number" name="deg" ng-model="deg" placeholder="{{deg}}" max="0" min="180"> degree
+						<button href="/1/set()"></button>
+						<button href="/1/reset">reset</button>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-4">
-						<button ng-click="left()">left</button>
+						<button href="/1/left">left</button>
 					</div>
 					<div class="col-lg-4">
-						<button ng-click="up()">up</button>
-						<button ng-click="down()">down</button>
+						<button href="/1/up">up</button>
+						<button href="/1/down">down</button>
 					</div>
 					<div class="col-lg-4">
-						<button ng-click="right()">right</button>
+						<button href="/1/right">right</button>
 						
 					</div>
 				</div>
 			</div>
-			
+			<!--
+				<h1>RPi Web Server</h1>
+   {% for pin in pins %}
+   <h2>{{ pins[pin].name }}
+   {% if pins[pin].state == true %}
+      is currently <strong>on</strong></h2><div class="row"><div class="col-md-2">
+      <a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div></div>
+   {% else %}
+      is currently <strong>off</strong></h2><div class="row"><div class="col-md-2">
+      <a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div></div>
+   {% endif %}
+   {% endfor %}        
+   -->
 		</div>
 		<div class="row">
 			<h1>Gallery</h1>
@@ -60,104 +74,27 @@
 			</div>
 			
 		</div>
+		
+		
+		
+		<script>
+			
+			
+			
+			
+		</script>
 		<script>
 		
 		 function test () {
-		  var gpio = require("pi-gpio");
-
-				gpio.open(16, "output", function(err) {		// Open pin 16 for output
-					gpio.write(14, 1, function() {			// Set pin 16 high (1)
-						gpio.close(14);						// Close pin 16
-					});
-				});
-		}
 			var app = angular.module('myApp', []);
 				app.controller('myCtrl', function($scope) {
-				    $scope.x = 0;
-				    $scope.y = 0;
-				    $scope.deg = 10;
-				    $scope.a ;
-				
-			//var gpio = require("pi-gpio");
-			 
-			//gpio.open(16, "output", function(err) {		// Open pin 16 for output 
-			  //  gpio.write(16, 1, function() {			// Set pin 16 high (1) have to find out how many degs it turns to 1 
-			    //    gpio.close(16);						// Close pin 16 
-			  //  });
-			//});
-			var  pic;
-			$scope.reset = function() {
-			  if($scope.x!=0){
-			  	if($scope.x<0){
-			  		$scope.up(-$scope.x);
-			  	}
-			  	if($scope.x>0){
-			  		$scope.down($scope.x);
-			  	}
+				    $scope.deg=10;
+				    
 			  }
-			  if($scope.y!=0){
-			  	if($scope.y<0){
-			  		$scope.right(-$scope.y);
-			  	}
-			  	if($scope.y>0){
-			  		$scope.left($scope.y);
-			  	}
-			  }
-			};
-			$scope.preview = function() {
-				//take pic 
-				//store into mem
-				//make pic link address = pic
-			};
-			$scope.capture = function () {
-			  	//take pic 
-				//store into mem
-			};
 			
-			$scope.up= function(a) {
-			  if(a==null){
-			  	//move by deg 
-			  	$scope.x=$scope.x+$scope.deg;
-			  }
-			  else{
-			  	//move by int a 
-			  	$scope.x=$scope.x+a;
-			  }
-			};
-			$scope.down = function(a) {
-			  if(a==null){
-			  	//move b$scope.y $scope.deg 
-			  	$scope.x=$scope.x-$scope.deg;
-			  }
-			  else{
-			  	//move by int a 
-			  	$scope.x=$scope.x-a;
-			  }
-			};
-			$scope.left = function(a) {
-			  if(a==null){
-			  	//move by deg 
-			  	$scope.y=$scope.y-$scope.deg;
-			  }
-			  else{
-			  	//move by int a 
-			  	//wait
-			  	$scope.y=$scope.y-a;
-			  }
-			};
-			$scope.right = function(a) {
-			 if(a==null){
-			  	//move by deg 
-			  	$scope.y=$scope.y+$scope.deg;
-			  }
-			  else{
-			  	//move by int a 
-			  	$scope.y=$scope.y+a;
-			  }
-			};
 			
-			});
-		</script>
+			);
+		</script>--->
 	</body>
 	<footer>
 		<h1>Created by Joseph Abel and Nathan Dalling</h1>
