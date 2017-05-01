@@ -60,21 +60,19 @@ def action(action):
           pwm1.ChangeDutyCycle(0)  # turn towards 90 degree #Open   
           time.sleep(1)
           x=0
-          y=0  
+          y=0 
+    if action == "capture":
+          cam = Camera()
+          time.sleep(0.1)  # If you don't wait, the image will be dark
+          img = cam.getImage()
+          img.save("simplecv.png")
+         
        
     # For each pin, read the pin state and store it in the pins dictionary:
     
     x = GPIO.input(pin);
     y = GPIO.input(pin);
-    return render_template('index.php', **templateData)@app.route("/cap/<action>")
-def action(action):
-    if action == "takepic":
-       
-cam = Camera()
-time.sleep(0.1)  # If you don't wait, the image will be dark
-img = cam.getImage()
-img.save("simplecv.png")
-    return render_template('index.php', **templateData)
+    return render_template('index.php', **templateData)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)

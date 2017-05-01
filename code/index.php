@@ -36,7 +36,7 @@
 					</div>
 					<div class="col-lg-4">
 						arrow click is  <input type="number" name="deg" ng-model="deg" placeholder="{{deg}}" max="0" min="180"> degree
-						<button href="/1/set()"></button>
+						<button href="/1/capture">capture</button>
 						<button href="/1/reset">reset</button>
 					</div>
 				</div>
