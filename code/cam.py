@@ -36,23 +36,23 @@ def action(action):
 
     if action == "left":
           x=x-deg
-          dx=1./18.*(x)+2
-          pwm1.ChangeDutyCycle(dx)  # turn towards 90 degree #Open   
+          dx2=1./18.*(x)+2
+          pwm1.ChangeDutyCycle(dx2)  # turn towards 90 degree #Open   
           time.sleep(1)  
     if action == "right":
           x=x+deg
-          dx=1./18.*(x)+2
-          pwm1.ChangeDutyCycle(7.5)  # turn towards 90 degree #Open
+          dx1=1./18.*(x)+2
+          pwm1.ChangeDutyCycle(dx1)  # turn towards 90 degree #Open
           time.sleep(1)  
     if action == "down":
           y=y-deg
-          dy=1./18.*(y)+2
-          pwm2.ChangeDutyCycle(7.5)  # turn towards 90 degree #Open
+          dy1=1./18.*(y)+2
+          pwm2.ChangeDutyCycle(dy1)  # turn towards 90 degree #Open
           time.sleep(1)  
     if action == "up":
           y=y+deg
-          dy=1./18.*(y)+2
-          pwm2.ChangeDutyCycle(7.5)  # turn towards 90 degree #Open
+          dy2=1./18.*(y)+2
+          pwm2.ChangeDutyCycle(dy2)  # turn towards 90 degree #Open
           time.sleep(1)  
     if action == "reset":
           pwm2.ChangeDutyCycle(0)  # turn towards 90 degree #Open
