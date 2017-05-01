@@ -1,5 +1,10 @@
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
+import time
+from SimpleCV import Camera
+#sudo apt-get install python-opencv
+
+
 app = Flask(__name__)
 
 GPIO.setmode(GPIO.BOARD)
@@ -19,7 +24,7 @@ def main():
    dx=0
    dy=0
 
-   return render_template('index.html', **templateData)
+   return render_template('index.php', **templateData)
 
     
 # The function below is executed when someone requests a URL with the pin number and action in it:
@@ -61,11 +66,15 @@ def action(action):
     
     x = GPIO.input(pin);
     y = GPIO.input(pin);
-    return render_template('index.html', **templateData)@app.route("/cap/<action>")
+    return render_template('index.php', **templateData)@app.route("/cap/<action>")
 def action(action):
     if action == "takepic":
-        
-    return render_template('index.html', **templateData)
+       
+cam = Camera()
+time.sleep(0.1)  # If you don't wait, the image will be dark
+img = cam.getImage()
+img.save("simplecv.png")
+    return render_template('index.php', **templateData)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
