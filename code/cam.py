@@ -18,11 +18,13 @@ pwm2.start(7.5)
 
 @app.route("/")
 def main():
-    x  = 0
-    y =0
-    deg= 10
-    dx=0
-    dy=0
+    templateData={
+        'x'= 0
+        'y' =0
+        'deg'= 10
+        dx=0
+        dy=0}
+   
     
     return render_template('index.php', **templateData)    
 
