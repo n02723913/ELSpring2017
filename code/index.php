@@ -23,7 +23,7 @@
 			<div class="col-lg-8">
 				<h1>Camera</h1>
 				<a>Preview</a>
-				<img alt="" src="http://(YOUR IP    ):8090/?action=stream" width="50%" height="50%" />
+				<img alt="" src="http://0.0.0.0:8090/?action=stream" width="50%" height="50%" />
 			</div>
 			<div class="col-lg-4">
 				<div class="row" >
