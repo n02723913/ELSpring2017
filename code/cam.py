@@ -1,79 +1,67 @@
 import RPi.GPIO as GPIO
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import time
-from SimpleCV import Camera
+#from SimpleCV import Camera
 #sudo apt-get install python-opencv
+from picamera import PiCamera
+from time import sleep
 
+#camera = PiCamera()
+
+#camera.start_preview()
+#sleep(10)
+#camera.stop_preview()
 
 app = Flask(__name__)
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(0, GPIO.OUT)  
-pwm1 = GPIO.PWM(0, 50)  
-pwm1.start(5)  
-GPIO.setup(1, GPIO.OUT)  
-pwm2 = GPIO.PWM(1, 50)  
-pwm2.start(7.5)  
+#GPIO.setmode(GPIO.BOARD)
+#GPIO.setup(0, GPIO.OUT)  
+#pwm1 = GPIO.PWM(0, 50)  
+#pwm1.start(5)  
+#GPIO.setup(1, GPIO.OUT)  
+#pwm2 = GPIO.PWM(1, 50)  
+#pwm2.start(7.5)  
 
 
 @app.route("/")
 def main():
     templateData={
-        'x'= 0
-        'y' =0
-        'deg'= 10
-        dx=0
-        dy=0}
+        'x' : 0 ,
+        'y' : 0,
+        'deg': 10,
+        }
+    return render_template('index.html', **templateData)
+    
+
+
+@app.route("/move", methods = ['POST', 'GET'])
+def move():
+    x=request.form('x')
+    dx2=1./18.*(x)+2
+    pwm1.ChangeDutyCycle(dx2)
+    time.sleep(1)
+    y=request.form('y')
+
+@app.route("/reset")
+def reset():
+    dx2=1./18.*(0)+2
+    pwm1.ChangeDutyCycle(dx2)    
+    time.sleep(1)
+    
+
+@app.route("/capture", methods = ['POST', 'GET'])
+def capture():
+
+  	
+    camera = PiCamera()
+    camera.start_preview()
+    sleep(5)
+    camera.capture('/home/pi/Desktop/img/i.jpg')
+    camera.stop_preview()
+    return render_template('index.html')
    
     
-    return render_template('index.php', **templateData)    
 
-    
-# The function below is executed when someone requests a URL with the pin number and action in it:
-@app.route("/1/<action>")
-def action(action): 
-
-    if action == "left":
-        if(x<0):
-            x=x-deg
-            dx2=1./18.*(x)+2
-            pwm1.ChangeDutyCycle(dx2)  # turn towards 90 degree #Open   
-            time.sleep(1)  
-    if action == "right":
-        if(x<0):
-            x=x+deg
-            dx1=1./18.*(x)+2
-            pwm1.ChangeDutyCycle(dx1)  # turn towards 90 degree #Open
-            time.sleep(1)  
-    if action == "down":
-        if(x<0):
-            y=y-deg
-            dy1=1./18.*(y)+2
-            pwm2.ChangeDutyCycle(dy1)  # turn towards 90 degree #Open
-            time.sleep(1)  
-    if action == "up":
-        if(x<0):
-            y=y+deg
-            dy2=1./18.*(y)+2
-            pwm2.ChangeDutyCycle(dy2)  # turn towards 90 degree #Open
-            time.sleep(1)  
-          
-    if action == "reset":
-        pwm2.ChangeDutyCycle(1./9)  # turn towards 90 degree #Open
-        time.sleep(1)  
-        pwm1.ChangeDutyCycle(1./9)  # turn towards 90 degree #Open   
-        time.sleep(1)
-        x=0
-        y=0 
-    if action == "capture":
-        cam = Camera()
-        time.sleep(0.1)  # If you don't wait, the image will be dark
-        img = cam.getImage()
-        img.save("simplecv.png")
-         
-       
-    # For each pin, read the pin state and store it in the pins dictionary:
-    return render_template('index.php', **templateData)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
