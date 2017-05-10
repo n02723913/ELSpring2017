@@ -35,39 +35,38 @@
 						y = {{y}}
 					</div>
 					<div class="col-lg-4">
-<form action="/reset">
-    <input type="submit" value="Reset">
-</form>
-<form action="/capture">
-<input type="text" name="name">
-    <input type="submit" value="capture">
-</form>
+						<form action="/reset">
+						    <input type="submit" value="Reset">
+						</form>
+						<form action="/capture">
+						<input type="text" name="name">
+						    <input type="submit" value="capture">
+						</form>
 
-<form action="/move">
-	<input type="number" name="x">
-	<input type="number" name="y">
+						<form action="/move">
+							<input type="number" name="x">
+							<input type="number" name="y">
 
-    <input type="submit" value="Set">
-</form>
-						
+						    <input type="submit" value="Set">
+						</form>
+						<form action="/up">
+						    <input type="submit" value="up">
+						</form>
+						<form action="/down">
+						    <input type="submit" value="down">
+						</form>
+						<form action="/left">
+						    <input type="submit" value="left">
+						</form>
+						<form action="/right">
+						    <input type="submit" value="right">
+						</form>
 					</div>
 				</div>
 				
 				</div>
 			</div>
-			<!--
-				<h1>RPi Web Server</h1>
-   {% for pin in pins %}
-   <h2>{{ pins[pin].name }}
-   {% if pins[pin].state == true %}
-      is currently <strong>on</strong></h2><div class="row"><div class="col-md-2">
-      <a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Turn off</a></div></div>
-   {% else %}
-      is currently <strong>off</strong></h2><div class="row"><div class="col-md-2">
-      <a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Turn on</a></div></div>
-   {% endif %}
-   {% endfor %}        
-   -->
+		
 		</div>
 		<div class="row">
 			<h1>Gallery</h1>
@@ -79,17 +78,6 @@
 		
 		
 		
-		<script>
-			
-			
-			
-			
-		</script>
-		<script>
-		
-		 
-			);
-		</script>--->
 	</body>
 	<footer>
 		<h1>Created by Joseph Abel and Nathan Dalling</h1>
