@@ -50,30 +50,7 @@ def reset():
     time.sleep(1)
     return render_template('index.html')
 
-@app.route("/left")
-def reset():
-    dx2=1./18.*(10)+2
-    pwm1.ChangeDutyCycle(dx2)    
-    time.sleep(1)
-    return render_template('index.html')
-@app.route("/right")
-def reset():
-    dx2=1./18.*(10)+2
-    pwm1.ChangeDutyCycle(dx2)    
-    time.sleep(1)
-    return render_template('index.html')
-@app.route("/down")
-def reset():
-    dx2=1./18.*(0)+2
-    pwm1.ChangeDutyCycle(dx2)    
-    time.sleep(1)
-    return render_template('index.html')
-@app.route("/")
-def reset():
-    dx2=1./18.*(0)+2
-    pwm1.ChangeDutyCycle(dx2)    
-    time.sleep(1)
-    return render_template('index.html')
+
 @app.route("/capture", methods = ['POST', 'GET'])
 def capture():
 
