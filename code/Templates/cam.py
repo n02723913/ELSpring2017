@@ -62,7 +62,7 @@ def capture():
     camera.stop_preview()
     return render_template('index.html')
 
-#TEST CODE FOR THE GALLERY
+#TEST CODE FOR THE GALLERY https://github.com/ibininja/upload_file_python
 @app.route("/upload", methods=["POST"])
 def upload():
     target = os.path.join(APP_ROOT, '/home/pi/Desktop/img/')
