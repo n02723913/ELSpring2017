@@ -61,6 +61,37 @@ def capture():
     camera.capture('/home/pi/Desktop/img/i.jpg')
     camera.stop_preview()
     return render_template('index.html')
+
+#TEST CODE FOR THE GALLERY
+@app.route("/upload", methods=["POST"])
+def upload():
+    target = os.path.join(APP_ROOT, '/home/pi/Desktop/img/')
+    print(target)
+    if not os.path.isdir(target):
+            os.mkdir(target)
+    else:
+        print("Couldn't create upload directory: {}".format(target))
+    print(request.files.getlist("file"))
+    for upload in request.files.getlist("file"):
+        print(upload)
+        print("{} is the file name".format(upload.filename))
+        filename = upload.filename
+        destination = "/".join([target, filename])
+        print ("Accept incoming file:", filename)
+        print ("Save it to:", destination)
+        upload.save(destination)
+
+    # return send_from_directory("images", filename, as_attachment=True)
+    return render_template("index.html", image_name=filename)#might be  to a diffeent html 
+
+@app.route('/upload/<filename>')
+def send_image(filename):
+    return send_from_directory("/home/pi/Desktop/img", filename)
+@app.route('/gallery')
+def get_gallery():
+    image_names = os.listdir('./home/pi/Desktop/img')
+    print(image_names)
+    return render_template("index.html", image_names=image_names)
    
     
 
