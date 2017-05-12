@@ -65,7 +65,7 @@ def capture():
 #TEST CODE FOR THE GALLERY https://github.com/ibininja/upload_file_python
 @app.route("/upload", methods=["POST"])
 def upload():
-    target = os.path.join(APP_ROOT, '/home/pi/Desktop/img/')
+    target = os.path.join(APP_ROOT, 'img/')
     print(target)
     if not os.path.isdir(target):
             os.mkdir(target)
@@ -86,10 +86,10 @@ def upload():
 
 @app.route('/upload/<filename>')
 def send_image(filename):
-    return send_from_directory("/home/pi/Desktop/img", filename)
+    return send_from_directory("img", filename)
 @app.route('/gallery')
 def get_gallery():
-    image_names = os.listdir('./home/pi/Desktop/img')
+    image_names = os.listdir('./img')
     print(image_names)
     return render_template("index.html", image_names=image_names)
    
